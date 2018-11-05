@@ -8,7 +8,6 @@ describe Customer do
 
       movie_id = Movie.first.id
       @movie = Movie.first
-      @user.movies << @movie
 
       @user.registered_at = DateTime.now
       @user.save
@@ -16,6 +15,8 @@ describe Customer do
       @no_movies_user = Customer.last
       @no_movies_user.registered_at = DateTime.now
       @no_movies_user.save
+
+      @rental = Rental.create(customer: @user, movie: @movie)
     end
 
     describe 'relations' do
