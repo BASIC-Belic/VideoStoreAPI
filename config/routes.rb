@@ -17,10 +17,10 @@ Rails.application.routes.draw do
   # p	integer	Page of responses to return
 
   #WAVE 3
-  post '/rentals/overdue', to: ''
-  get '/movies/:id/current'
-  get '/movies/:id/history'
-  get '/customers/:id/current'
-  get '/movies/:id/current'
-  get '/customers/:id/history'
+  # post '/rentals/overdue', to: ''
+  # get '/movies/:id/current'
+  # get '/movies/:id/history'
+  # get '/customers/:id/current'
+  # get '/movies/:id/current'
+  # get '/customers/:id/history'
 end
