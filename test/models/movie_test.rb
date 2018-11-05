@@ -18,21 +18,24 @@ describe Movie do
       # customer variable
       customer_id = @movie2.customer_ids[0]
       @customer = Customer.find_by(id: customer_id)
-
-
-      expect(@movie2.customer_ids.include? @customer.id).must_equal true
     end
 
-    it 'each movie can have 0 customers' do
+    it 'each movie can have 1 customer'do
 
-      expect(@movie).must_respond_to  :customers
-      expect(@movie.customers.length).must_equal 0
-
-    end
+    expect(@movie2.customer_ids.include? @customer.id).must_equal true
+  end
 
 
-
+  it 'each movie can have 0 customers' do
+    
+    expect(@movie).must_respond_to  :customers
+    expect(@movie.customers.length).must_equal 0
 
   end
+
+
+
+
+end
 
 end
