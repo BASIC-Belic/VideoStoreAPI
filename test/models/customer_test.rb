@@ -31,6 +31,15 @@ describe Customer do
         end
       end
     end
+
+    describe 'validations' do
+      it 'will be valid' do
+      end
+
+      it 'will not be valid' do
+      end
+    end
+
   end
 
 end
