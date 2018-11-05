@@ -5,6 +5,8 @@ describe Customer do
 
     before do
       @user = Customer.first
+      @user.registered_at = DateTime.today
+      @user.save
     end
 
     describe 'relations' do
