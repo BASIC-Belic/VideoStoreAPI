@@ -61,7 +61,7 @@ describe MoviesController do
     it 'returns an error for invalid movie data for missing name' do
 
       movie_params[:movie][:title] = nil
-
+      
       expect {
         post movies_path, params: movie_params
       }.wont_change 'Movie.count'
