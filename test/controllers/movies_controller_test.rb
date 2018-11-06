@@ -36,15 +36,17 @@ describe MoviesController do
       end
     end
 
-    # it "returns an empty array when there are no movies" do
-    #
-    #   Movie.destroy_all
-    #   get movies_path
-    #
-    #   must_respond_with :success
-    #   body = check_response(expected_type: Array)
-    #   expect(body).must_equal []
-    # end
+    it "returns an empty array when there are no movies" do
+
+      Movie.destroy_all
+      get movies_path
+
+      must_respond_with :success
+      body = check_response(expected_type: Array)
+      expect(body).must_equal []
+    end
+
+    #check nullify test
 
   end
 
