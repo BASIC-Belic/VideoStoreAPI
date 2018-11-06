@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :movies, only: [:index, :show, :create]
   resources :customers, only: [:index]
 
+  post 'rentals/checkout', to: 'rentals#create', as: 'create_rental'
+
   # get '/customers', to: 'customer#index', as: 'list_customers'
   # get '/movies', to: 'movies#index', as: 'list_movies'
   # get '/movies/:id', to: 'movies#show', as: 'movie_show'
