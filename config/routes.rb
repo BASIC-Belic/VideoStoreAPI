@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   # n	integer	Number of responses to return per page
   # p	integer	Page of responses to return
 
-  #WAVE 3
+  # #WAVE 3
+  #create rental route with movie and customer id
   # post '/rentals/overdue', to: ''
   # get '/movies/:id/current'
   # get '/movies/:id/history'
