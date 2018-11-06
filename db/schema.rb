@@ -25,8 +25,6 @@ ActiveRecord::Schema.define(version: 2018_11_06_002157) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "registered_at"
-    t.bigint "movie_id"
-    t.index ["movie_id"], name: "index_customers_on_movie_id"
   end
 
   create_table "customers_movies", id: false, force: :cascade do |t|
@@ -45,8 +43,6 @@ ActiveRecord::Schema.define(version: 2018_11_06_002157) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "release_date"
-    t.bigint "customer_id"
-    t.index ["customer_id"], name: "index_movies_on_customer_id"
   end
 
   create_table "rentals", force: :cascade do |t|
@@ -61,10 +57,8 @@ ActiveRecord::Schema.define(version: 2018_11_06_002157) do
     t.index ["movie_id"], name: "index_rentals_on_movie_id"
   end
 
-  add_foreign_key "customers", "movies"
   add_foreign_key "customers_movies", "customers"
   add_foreign_key "customers_movies", "movies"
-  add_foreign_key "movies", "customers"
   add_foreign_key "rentals", "customers"
   add_foreign_key "rentals", "movies"
 end
