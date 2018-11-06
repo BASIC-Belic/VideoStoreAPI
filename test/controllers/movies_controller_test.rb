@@ -1,10 +1,6 @@
 require "test_helper"
 
 describe MoviesController do
-  # it "must be a real test" do
-  #   flunk "Need real tests"
-  # end
-
 
   MOVIE_PARAMS = %w(title release_date overview inventory).sort!
 
@@ -24,7 +20,34 @@ describe MoviesController do
   end
 
   describe 'index' do
+
+    it "is a real and working route" do
+      get movies_path
+
+      must_respond_with :success
+      expect(response.header['Content-Type']).must_include 'json'
+
+      body = JSON.parse(response.body)
+      expect(body).must_be_kind_of Array
+      expect(body.length).must_equal Movie.count
+
+      body.each do |movie|
+        expect(movie.keys.sort).must_equal MOVIE_PARAMS
+      end
+    end
+
+    # it "returns an empty array when there are no movies" do
+    #
+    #   Movie.destroy_all
+    #   get movies_path
+    #
+    #   must_respond_with :success
+    #   body = check_response(expected_type: Array)
+    #   expect(body).must_equal []
+    # end
+
   end
+
 
   describe 'show' do
 
