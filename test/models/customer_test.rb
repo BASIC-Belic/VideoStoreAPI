@@ -4,10 +4,10 @@ describe Customer do
   describe Customer do
 
     before do
-      @user = Customer.first
 
-      movie_id = Movie.first.id
+      @user = Customer.first
       @movie = Movie.first
+      @rental = Rental.create(customer: @user, movie: @movie)
 
       @user.registered_at = DateTime.now
       @user.save
@@ -16,40 +16,29 @@ describe Customer do
       @no_movies_user.registered_at = DateTime.now
       @no_movies_user.save
 
-      @rental = Rental.create(customer: @user, movie: @movie)
+
     end
 
     describe 'relations' do
-
-      it "can have 0 movies" do
-        expect(@no_movies_user.valid?).must_equal true
-        expect(@no_movies_user).must_respond_to :movies
-        expect(@no_movies_user.movies.empty?).must_equal true
+      it 'belongs to rentals' do
+        expect(@rental.customer_id).must_equal @user.id
       end
 
-      it "can have 1 or more movies" do
+      it "can have 0 movies through rentals" do
+        expect(@no_movies_user.valid?).must_equal true
+        expect(@no_movies_user).must_respond_to :rentals
+        expect(@no_movies_user.rentals.empty?).must_equal true
+      end
+
+      it "can have 1 or more movies through rentals" do
 
         expect(@user.valid?).must_equal true
-        expect(@user).must_respond_to :movies
-        expect(@user.movies.length).must_equal 1
+        expect(@user).must_respond_to :rentals
+        expect(@user.rentals.length).must_equal 1
+        expect(@user.rentals[0].movie_id).must_equal @movie.id
 
-        @user.movies.each do |movie|
-          expect(movie).must_be_kind_of Movie
-          expect(movies.include?(@movie))
-        end
-      end
-
-      it 'belongs to 0 or many movies' do
-        movie_ids = @user.movie_ids
-        movie_ids.each do |id|
-          movie = Movie.find_by(id: id)
-          expect(movie).must_be_kind_of Movie
-        end
-
-        customer_ids = @movie.customer_ids
-        customer_ids.each do |id|
-          customer = Customer.find_by(id: id)
-          expect(customer).must_be_kind_of Customer
+        @user.rentals.each do |rental|
+          expect(rental).must_be_kind_of Rental
         end
       end
     end
