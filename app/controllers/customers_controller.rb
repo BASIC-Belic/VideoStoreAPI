@@ -6,8 +6,6 @@ class CustomersController < ApplicationController
 
     if customers
       render json: jsonify(customers), status: :ok
-    else
-      render_errors(:not_found, { customers: ["No customers found."]})
     end
   end
 
