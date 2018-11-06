@@ -3,11 +3,11 @@ class CustomersController < ApplicationController
   def index
 
     customers = Customer.all
-    
+
     if customers
       render json: jsonify(customers), status: :ok
     else
-      render_error(:not_found, { customers: ["No customers found."]})
+      render_errors(:not_found, { customers: ["No customers found."]})
     end
   end
 
