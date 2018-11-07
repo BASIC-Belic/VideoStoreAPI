@@ -8,7 +8,7 @@ end
 
 customers = Customer.all
 customers.each do |customer|
-  movie = Movie.find_by("available_inventory > ?", 0 )
+  movie = Movie.find_by("inventory > ?", 0 )
 
   Rental.create(customer: customer, movie: movie)
 end
