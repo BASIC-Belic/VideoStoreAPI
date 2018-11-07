@@ -1,5 +1,5 @@
 class Rental < ApplicationRecord
-  belongs_to :movie
+  belongs_to :movie, counter_cache: true
   belongs_to :customer
   after_initialize :create_checkout
   #/rentals/check-out
