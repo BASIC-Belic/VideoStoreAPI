@@ -3,7 +3,6 @@ class Rental < ApplicationRecord
   belongs_to :customer
   after_initialize :create_checkout
   #/rentals/check-out
-  validates :postal_code, presence: true
   validates :movie, presence: true
   validates :customer, presence: true, uniqueness: {
     scope: :movie, "Customer has already rented this movie."
