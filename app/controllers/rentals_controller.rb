@@ -4,16 +4,10 @@ class RentalsController < ApplicationController
     movie = Movie.find_by(id: rental_params[:movie_id].to_i)
     customer = Customer.find_by(id: rental_params[:customer_id].to_i)
 
-    # this first case might not be necessary bc the error messages would prevent saving a duplicate
-    # if movie && customer
-    #   rental = Rental.find_by(customer: customer, movie: movie)
-    if customer
-      rental = Rental.new( customer: customer, movie: movie, postal_code: customer.postal_code )
-    else
       rental = Rental.new( customer: customer, movie: movie )
-    end
 
     if rental.save
+      rental.postal_code = customer.postal_code
       rental.update(checked_out: true)
       render json: { id: rental.id }
     else
