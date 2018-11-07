@@ -6,7 +6,6 @@ class Rental < ApplicationRecord
   validates :movie, presence: true
   validates :customer, presence: true
 
-
 private
 
   def create_checkout
