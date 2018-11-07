@@ -6,6 +6,7 @@ class ApplicationController < ActionController::API
 
   #helper method to find movie for seed and in general
   def self.find_available_movie
-    return Movie.find{ |m| m.available_inventory > 0 }
+    return Movie.find do |m| m.available_inventory > 0
+    end
   end
 end
