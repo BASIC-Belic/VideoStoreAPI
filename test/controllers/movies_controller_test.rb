@@ -97,8 +97,5 @@ describe MoviesController do
       expect(body["errors"]).must_include "title"
       expect(Movie.last.id).wont_equal body["id"]
     end
-
   end
-
-
 end
