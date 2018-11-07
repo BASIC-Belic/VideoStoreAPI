@@ -4,11 +4,15 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-RentalOne: {
-  movie_id: CityOfLostChildren
-  customer_id: Kat
-  }
-# column: value
-#
-# rent_two: {}
-# column: value
+RentalOne:
+  movie: one
+  customer: one
+
+RentalTwo:
+  movie: two
+  customer: one
+
+  # column: value
+  #
+  # rent_two: {}
+  # column: value

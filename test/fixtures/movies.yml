@@ -1,6 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-CityOfLostChildren:
+zero:
+  title: MyString
+  overview: MyString
+  release_date: MyString
+  inventory: 2
+
+one:
   title: City of Lost Children
   overview: Scientist kidnaps children and steals their dreams
   release_date: 10-22-99
@@ -10,4 +16,4 @@ two:
   title: MyString
   overview: MyString
   release_date: MyString
-  inventory: 1
+  inventory: 2
