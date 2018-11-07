@@ -1,5 +1,5 @@
 require "test_helper"
-# :id, :name, :address, :city, :state, :postal_code, :phone, :registered_at])
+# :id, :name, :address, :city, :state, :postal_code, :phone, :registered_at, :movies_checked_out_count])
 
 
   # helper method to refactor the json
@@ -7,7 +7,7 @@ require "test_helper"
 
 describe CustomersController do
 
-  CUSTOMER_FIELDS = %w(id name address city state postal_code phone registered_at).sort!
+  CUSTOMER_FIELDS = %w(id name address city state postal_code phone registered_at movies_checked_out_count).sort!
 
 
   def check_response(expected_type:, expected_status: :success)
