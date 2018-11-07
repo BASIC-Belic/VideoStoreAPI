@@ -26,17 +26,25 @@ describe Movie do
 
   describe 'available_inventory' do
 
-    it 'will return 0 if movie has no available inventory' do
+    it 'will return 0 if movie has no available inventory to start with' do
+      expect(@empty_movie.inventory).must_equal 0
       expect(@empty_movie.available_inventory).must_equal 0
     end
 
-    it 'will return correct available inventory if some rentals on movie' do
-      expect(@semi_full_movie.available_inventory).wont_equal inventory
-      expect(@semi_full_movie.available_inventory).must_be :>=, @semi_full_movie.inventory
+    it 'will subtract all movies and return 0 if all movies rented out' do
+      inventory = @full_movie.inventory
+      rentals = @full_movie.rentals.length
+
+      expect(@full_movie.available_inventory).must_equal inventory - rentals
+      expect(@full_movie.available_inventory).must_equal 0
     end
 
-    it 'will return value inventory length if all movies have current rentals' do
-      expect(@full_movie.available_inventory).must_equal @full_movie.inventory
+    it 'will return correct available inventory if some rentals on movie' do
+      inventory = @semi_full_movie.inventory
+      rentals = @semi_full_movie.rentals.length
+
+      expect(@semi_full_movie.available_inventory).must_equal inventory - rentals
+
     end
     #
     # it 'will return [something] for negative???' do
