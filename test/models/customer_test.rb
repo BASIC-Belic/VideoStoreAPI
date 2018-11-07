@@ -4,26 +4,20 @@ describe Customer do
   describe Customer do
 
     before do
-
-      @user = Customer.first
-      @user.name = "User"
-      @movie = Movie.first
-      @rental = Rental.create(customer: @user, movie: @movie)
-
+      @user = customers(:one)
       @user.registered_at = DateTime.now
       @user.save
 
-      @no_movies_user = Customer.last
-      @no_movies_user.name = "No Movies User"
+      @no_movies_user = customers(:two)
       @no_movies_user.registered_at = DateTime.now
       @no_movies_user.save
-
-
     end
 
     describe 'relations' do
       it 'belongs to rentals' do
-        expect(@rental.customer_id).must_equal @user.id
+        rental = Rental.find_by(id: @user.rentals[0].id)
+        expect(rental).must_be_kind_of Rental
+        expect(rental.customer_id).must_equal @user.id
       end
 
       it "can have 0 movies through rentals" do
@@ -34,10 +28,12 @@ describe Customer do
 
       it "can have 1 or more movies through rentals" do
 
+        movie = Movie.find_by(id: @user.rentals[0].movie_id)
+
         expect(@user.valid?).must_equal true
         expect(@user).must_respond_to :rentals
-        expect(@user.rentals.length).must_equal 1
-        expect(@user.rentals[0].movie_id).must_equal @movie.id
+        expect(@user.rentals.length).must_be :>=, 1
+        expect(@user.rentals[0].movie_id).must_equal movie.id
 
         @user.rentals.each do |rental|
           expect(rental).must_be_kind_of Rental
