@@ -2,7 +2,7 @@ require "test_helper"
 
 describe MoviesController do
 
-  MOVIE_PARAMS = %w(title release_date overview inventory id).sort!
+  MOVIE_PARAMS = %w(title release_date overview inventory id available_inventory).sort!
 
   def check_response(expected_type:, expected_status: :success)
     must_respond_with expected_status
