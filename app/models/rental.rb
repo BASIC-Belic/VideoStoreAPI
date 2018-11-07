@@ -5,7 +5,7 @@ class Rental < ApplicationRecord
   #/rentals/check-out
   validates :movie, presence: true
   validates :customer, presence: true, uniqueness: {
-    scope: :movie, message: "Customer has already rented this movie."
+    scope: [:movie, :due_date, :checkout_date], message: "Customer has already rented this movie."
   }
 
   private
