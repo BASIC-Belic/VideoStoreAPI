@@ -3,7 +3,7 @@ class Movie < ApplicationRecord
 
   validates :title, presence: true
 
-  def calculate_inventory
-    Rental.where()
+  def calculate_available
+    return self.inventory - self.rentals_count
   end
 end
