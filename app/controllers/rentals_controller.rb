@@ -9,7 +9,7 @@ class RentalsController < ApplicationController
     if rental.save
       rental.update(postal_code: customer.postal_code)
       rental.update(checked_out: true)
-      render json: { id: rental.id }
+      render json: { id: rental.id, checked_out: rental.checked_out }
     else
       render_errors(:bad_request, rental.errors.messages)
     end
@@ -20,7 +20,7 @@ class RentalsController < ApplicationController
 
     if rental
       rental.update(checked_out: false)
-      render json: { id: rental.id }
+      render json: { id: rental.id, checked_out: rental.checked_out }
     else
       render_errors(:not_found, { rental: ["Rental not found."]})
     end
