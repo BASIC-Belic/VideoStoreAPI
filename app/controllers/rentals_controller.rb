@@ -7,7 +7,7 @@ class RentalsController < ApplicationController
       rental = Rental.new( customer: customer, movie: movie )
 
     if rental.save
-      rental.postal_code = customer.postal_code
+      rental.update(postal_code: customer.postal_code)
       rental.update(checked_out: true)
       render json: { id: rental.id }
     else
