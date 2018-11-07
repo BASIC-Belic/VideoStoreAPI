@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   resources :movies, only: [:index, :show, :create]
   resources :customers, only: [:index]
 
-  post 'rentals/checkout', to: 'rentals#create', as: 'checkout_rental'
 
-  post 'rentals/checkin', to: 'rentals#update', as: 'checkin_rental'
+  #http://localhost:3000/rentals/check-out
+  post 'rentals/check-out', to: 'rentals#create', as: 'checkout_rental'
+
+  post 'rentals/check-in', to: 'rentals#update', as: 'checkin_rental'
 
   # get '/customers', to: 'customer#index', as: 'list_customers'
   # get '/movies', to: 'movies#index', as: 'list_movies'
