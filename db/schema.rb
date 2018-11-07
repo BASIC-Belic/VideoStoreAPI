@@ -12,49 +12,43 @@
 
 ActiveRecord::Schema.define(version: 2018_11_07_001829) do
 
- # These are extensions that must be enabled in order to support this database
- enable_extension "plpgsql"
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
- create_table "customers", force: :cascade do |t|
-   t.string "name"
-   t.string "address"
-   t.string "city"
-   t.string "state"
-   t.string "postal_code"
-   t.string "phone"
-   t.datetime "created_at", null: false
-   t.datetime "updated_at", null: false
-   t.datetime "registered_at"
-   t.bigint "movie_id"
-   t.index ["movie_id"], name: "index_customers_on_movie_id"
- end
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "postal_code"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "registered_at"
+  end
 
- create_table "movies", force: :cascade do |t|
-   t.string "title"
-   t.string "overview"
-   t.integer "inventory"
-   t.datetime "created_at", null: false
-   t.datetime "updated_at", null: false
-   t.date "release_date"
-   t.bigint "customer_id"
-   t.index ["customer_id"], name: "index_movies_on_customer_id"
- end
+  create_table "movies", force: :cascade do |t|
+    t.string "title"
+    t.string "overview"
+    t.integer "inventory"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "release_date"
+  end
 
- create_table "rentals", force: :cascade do |t|
-   t.datetime "created_at", null: false
-   t.datetime "updated_at", null: false
-   t.bigint "movie_id"
-   t.bigint "customer_id"
-   t.integer "postal_code"
-   t.date "checkout_date"
-   t.date "due_date"
-   t.boolean "checked_out"
-   t.index ["customer_id"], name: "index_rentals_on_customer_id"
-   t.index ["movie_id"], name: "index_rentals_on_movie_id"
- end
+  create_table "rentals", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "movie_id"
+    t.bigint "customer_id"
+    t.integer "postal_code"
+    t.date "checkout_date"
+    t.date "due_date"
+    t.boolean "checked_out"
+    t.index ["customer_id"], name: "index_rentals_on_customer_id"
+    t.index ["movie_id"], name: "index_rentals_on_movie_id"
+  end
 
- add_foreign_key "customers", "movies"
- add_foreign_key "movies", "customers"
- add_foreign_key "rentals", "customers"
- add_foreign_key "rentals", "movies"
+  add_foreign_key "rentals", "customers"
+  add_foreign_key "rentals", "movies"
 end

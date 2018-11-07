@@ -5,3 +5,9 @@ end
 JSON.parse(File.read('db/seeds/movies.json')).each do |movie|
   Movie.create!(movie)
 end
+
+customers = Customer.all
+customers.each do |customer|
+  movie = Movie.find_by("inventory > ?", 0 )
+  Rental.create(customer: customer, movie: movie)
+end
