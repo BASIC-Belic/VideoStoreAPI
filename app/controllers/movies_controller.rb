@@ -33,7 +33,7 @@ class MoviesController < ApplicationController
   private
 
   def jsonify(movie_data)
-    return movie_data.as_json(only: [:title, :overview, :release_date, :inventory])
+    return movie_data.as_json(only: [:title, :overview, :release_date, :inventory, :id])
   end
 
   def movie_params

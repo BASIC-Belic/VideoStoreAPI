@@ -2,7 +2,7 @@ require "test_helper"
 
 describe MoviesController do
 
-  MOVIE_PARAMS = %w(title release_date overview inventory).sort!
+  MOVIE_PARAMS = %w(title release_date overview inventory id).sort!
 
   def check_response(expected_type:, expected_status: :success)
     must_respond_with expected_status
@@ -62,10 +62,16 @@ describe MoviesController do
 
   let(:movie_params){
     {
-        title: "Movie New",
-        release_date: "11/12/12",
-        overview: "new movie",
-        inventory: 1
+        id: Movie.first.id
+    }
+  }
+
+  let(:create_movie_params){
+    {
+        title: "title",
+        release_date: "1/11/99",
+        inventory: 7,
+        overview: "Overview"
     }
   }
 
@@ -73,7 +79,7 @@ describe MoviesController do
 
     it 'creates a new movie given valid data' do
       expect {
-        post movies_path, params: movie_params
+        post movies_path, params: create_movie_params
       }.must_change 'Movie.count', 1
 
       body = check_response(expected_type: Hash)
@@ -84,7 +90,7 @@ describe MoviesController do
 
     it 'returns an error for invalid movie data for missing name' do
 
-      movie_params[:title] = nil
+      movie_params[:id] = nil
 
       expect {
         post movies_path, params: movie_params
