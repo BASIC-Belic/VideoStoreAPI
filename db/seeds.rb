@@ -28,3 +28,9 @@ movies.each do |movie|
     puts "Problem here with calculating available"
   end
 end
+
+no_rentals = Customer.select{|c| c.rentals.length < 1 }
+
+if !no_rentals.empty?
+  puts "The following customer ids have no rentals: #{no_rentals.each { |c| c.id}}. Please fix."
+end
