@@ -62,12 +62,10 @@ describe MoviesController do
 
   let(:movie_params){
     {
-      movie: {
         title: "Movie New",
         release_date: "11/12/12",
         overview: "new movie",
         inventory: 1
-      }
     }
   }
 
@@ -86,7 +84,7 @@ describe MoviesController do
 
     it 'returns an error for invalid movie data for missing name' do
 
-      movie_params[:movie][:title] = nil
+      movie_params[:title] = nil
 
       expect {
         post movies_path, params: movie_params
