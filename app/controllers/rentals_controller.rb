@@ -19,7 +19,7 @@ class RentalsController < ApplicationController
     rental = Rental.find_by(rental_params)
 
     if rental
-      rental.update(checkout_out: false)
+      rental.update(checked_out: false)
       render json: { id: rental.id }
     else
       render_errors(:not_found, { rental: ["Rental not found."]})
