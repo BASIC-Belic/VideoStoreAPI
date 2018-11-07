@@ -9,6 +9,6 @@ end
 customers = Customer.all
 customers.each do |customer|
   movie = Movie.find_by("available_inventory > ?", 0 )
-  binding.pry
+
   Rental.create(customer: customer, movie: movie)
 end

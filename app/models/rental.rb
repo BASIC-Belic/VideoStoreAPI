@@ -6,7 +6,7 @@ class Rental < ApplicationRecord
   validates :movie, presence: true
   validates :customer, presence: true
 
-  private
+private
 
   def create_checkout
     self.checkout_date = Date.today
