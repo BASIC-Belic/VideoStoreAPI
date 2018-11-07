@@ -10,7 +10,9 @@ class Rental < ApplicationRecord
 
   def create_checkout
     self.checkout_date = Date.today
-    self.due_date = Date.today + 7
+    self.due_date = Date.today + 7r
     self.checked_out = true
+    decrement_inventory(self.movie)
   end
+
 end
