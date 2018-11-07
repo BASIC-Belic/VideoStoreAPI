@@ -6,6 +6,7 @@ describe Customer do
     before do
 
       @user = Customer.first
+      @user.name = "User"
       @movie = Movie.first
       @rental = Rental.create(customer: @user, movie: @movie)
 
@@ -13,6 +14,7 @@ describe Customer do
       @user.save
 
       @no_movies_user = Customer.last
+      @no_movies_user.name = "No Movies User"
       @no_movies_user.registered_at = DateTime.now
       @no_movies_user.save
 
