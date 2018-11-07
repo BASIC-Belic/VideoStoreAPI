@@ -15,6 +15,7 @@ class MoviesController < ApplicationController
     if movie
       render json: jsonify(movie)
     else
+      # render json: {}, status: :not_found
       render_error(:not_found, { movie_id: ["no such movie"] })
     end
   end
@@ -34,9 +35,9 @@ class MoviesController < ApplicationController
   def jsonify(movie_data)
     return movie_data.as_json(only: [:title, :overview, :release_date, :inventory])
   end
-  #
-  # def movie_params
-  #   params.require(:movie).permit(:title, :release_date, :overview, :inventory)
-  # end
+
+  def movie_params
+    params.permit(:title, :release_date, :overview, :inventory)
+  end
 
 end
