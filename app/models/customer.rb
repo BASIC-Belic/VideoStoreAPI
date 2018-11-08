@@ -6,6 +6,8 @@ class Customer < ApplicationRecord
   private
 
   def movies_checked_out_count
-    return self.rentals.count
+  return self.rentals.select {
+      |rental| rental.checked_out == true
+    }
   end
 end
