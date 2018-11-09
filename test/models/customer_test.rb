@@ -49,6 +49,21 @@ describe Customer do
     end
   end
 
+  let(:add_valid_rental) {
+    rental = Rental.new(movie: movies(:two), customer: @no_movies_user)
+    rental.save
+    @no_movies_user.reload
+  }
+
+  let(:checked_in_valid_rental) {
+    rental = @no_movies_user.rentals[0]
+    rental.checked_out = false
+    rental.save
+    rental.reload
+    @no_movies_user.reload
+
+  }
+
   describe 'movies_checked_out_count' do
 
     it 'will be zero for customer with no rentals' do
@@ -73,20 +88,44 @@ describe Customer do
       expect(@no_movies_user.rentals.count).must_equal 0
       expect(@no_movies_user.movies_checked_out_count).must_equal 0
 
-
-      rental = Rental.new(movie: movies(:two), customer: @no_movies_user)
-      rental.save
-      @no_movies_user.reload
-
+      add_valid_rental
 
       expect(@no_movies_user.rentals[0].checked_out).must_equal true
+      expect(@no_movies_user.rentals[0]).must_be_kind_of Rental
+      expect(@no_movies_user.rentals[1]).must_be_nil
       expect(@no_movies_user.movies_checked_out_count).must_equal 1
     end
 
     it 'will not increase if invalid rental added' do
+
+
+      # HOW TO DO THIS WITHOUT THROWING ERROR?
+      # expect(@no_movies_user.rentals.count).must_equal 0
+      # expect(@no_movies_user.movies_checked_out_count).must_equal 0
+      #
+      # rental = Rental.new(movie: "movie", customer: @no_movies_user)
+      # rental.save
+      # @no_movies_user.reload
+      #
+      # expect(@no_movies_user.rentals.count).must_equal 0
+      # expect(@no_movies_user.movies_checked_out_count).must_equal 0
     end
 
     it 'will decrease if rental checked in' do
+
+      expect(@user.rentals.count).must_equal 2
+      expect(@user.movies_checked_out_count).must_equal 2
+
+      # rental = @user.rentals.order(:id)[0]
+      rental = @user.rentals[0]
+      rental.checked_out = false
+      rental.save
+
+      expect(rental.checked_out).must_equal false
+      expect(@user.rentals[0]).must_be_kind_of Rental
+      expect(@user.rentals[1]).must_be_kind_of Rental
+      expect(@user.rentals[2]).must_be_nil
+      expect(@user.movies_checked_out_count).must_equal 1
     end
   end
 
