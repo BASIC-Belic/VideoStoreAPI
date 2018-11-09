@@ -73,8 +73,13 @@ describe Customer do
       expect(@no_movies_user.rentals.count).must_equal 0
       expect(@no_movies_user.movies_checked_out_count).must_equal 0
 
-      rental = Rental.create(movie: movies(:two), customer: @no_movies_user)
 
+      rental = Rental.new(movie: movies(:two), customer: @no_movies_user)
+      rental.save
+      @no_movies_user.reload
+
+
+      expect(@no_movies_user.rentals[0].checked_out).must_equal true
       expect(@no_movies_user.movies_checked_out_count).must_equal 1
     end
 
