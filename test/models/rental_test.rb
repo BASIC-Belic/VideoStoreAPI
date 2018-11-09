@@ -5,7 +5,7 @@ describe Rental do
   describe 'relations' do
 
     it 'a movie has many rentals' do
-      movie = Movie.first
+      movie = movies(:one)
       rental = Rental.where(movie: movie)
       expect(rental.count).must_equal 1
 

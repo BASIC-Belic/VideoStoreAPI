@@ -5,11 +5,11 @@
 # below each fixture, per the syntax in the comments below
 #
 RentalOne:
-  movie: one
+  movie: four
   customer: one
 
 RentalTwo:
-  movie: two
+  movie: one
   customer: one
 
   # column: value

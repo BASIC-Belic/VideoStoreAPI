@@ -3,17 +3,23 @@
 zero:
   title: MyString
   overview: MyString
-  release_date: MyString
+  release_date: 10-22-99
   inventory: 0
 
 one:
   title: City of Lost Children
   overview: Scientist kidnaps children and steals their dreams
-  release_date: 10-22-99
+  release_date: 9-22-99
   inventory: 1
 
 two:
   title: MyString
   overview: MyString
-  release_date: MyString
+  release_date: 12-22-99
   inventory: 2
+
+four:
+  title: NewOne
+  overview: MyString
+  release_date: 11-22-99
+  inventory: 4
