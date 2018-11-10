@@ -44,20 +44,19 @@ describe RentalsController do
       expect(Rental.last.id).must_equal body["id"]
     end
 
-    # it 'returns an error for invalid movie data' do
-    #
-    #   movie_params = { name: nil, inventory: -1 }
-    #
-    #   expect{
-    #     post movies_path, params: movie_params
-    #   }.wont_change 'Movie.count'
-    #
-    #   body = check_response(expected_type: Hash, expected_status: :bad_request)
-    #   expect(body).must_include "errors"
-    #   expect(body["errors"]).must_include "title"
-    #   expect(body["errors"]).must_include "inventory"
-    #   expect(Movie.last.id).wont_equal body["id"]
-    # end
+    it 'returns an error for invalid rental data' do
+      invalid_rental_params = { customer_id: nil, movie_id: @movie.id }
+
+      expect{
+        post checkout_rental_path, params: invalid_rental_params
+      }.wont_change 'Rental.count'
+
+      body = check_response(expected_type: Hash, expected_status: :bad_request)
+      expect(body).must_include "errors"
+      # expect(body["errors"]).must_include "movie"
+      expect(body["errors"]).must_include "customer"
+      expect(Movie.last.id).wont_equal body["id"]
+    end
   end
 
 
