@@ -5,6 +5,7 @@ describe RentalsController do
   before do
     @customer = customers(:one)
     @movie = movies(:four)
+    @checked_out_rental = rentals(:RentalOne)
   end
 
   RENTAL_PARAMS = %w(movie_id customer_id).sort!
@@ -18,15 +19,17 @@ describe RentalsController do
     return body
   end
 
-
-  # post 'rentals/check-out', to: 'rentals#create', as: 'checkout_rental'
-  #
-  # post 'rentals/check-in', to: 'rentals#update', as: 'checkin_rental'
-
   let(:create_rental_params){
     {
       customer_id: @customer.id,
       movie_id: @movie.id
+    }
+  }
+
+  let(:existing_rental_params){
+    {
+      customer_id: @checked_out_rental.id,
+      movie_id: @checked_out_rental.id
     }
   }
 
@@ -41,6 +44,7 @@ describe RentalsController do
 
       expect(body.keys).must_include "id"
       expect(body.keys).must_include "checked_out"
+      expect(body["checked_out"]).must_equal true
       expect(Rental.last.id).must_equal body["id"]
     end
 
@@ -55,8 +59,40 @@ describe RentalsController do
       expect(body).must_include "errors"
       # expect(body["errors"]).must_include "movie"
       expect(body["errors"]).must_include "customer"
-      expect(Movie.last.id).wont_equal body["id"]
+      expect(Rental.last.id).wont_equal body["id"]
     end
+  end
+
+  # patch 'rentals/check-in', to: 'rentals#update', as: 'checkin_rental'
+
+  describe 'update' do
+
+    it 'updates checked_out to false given exiting rental data' do
+      # expect{
+      #   post checkin_rental_path, params: existing_rental_params
+      # }.wont_change 'Rental.count'
+      #
+      #
+      # body = check_response(expected_type: Hash)
+      #
+      # expect(body.keys).must_include "id"
+      # expect(body.keys).must_include "checked_out"
+      # expect(body["checked_out"]).must_equal false
+      # expect(@checked_out_rental.id).must_equal body["id"]
+
+    end
+
+    it 'gives an error and status not found f given non existent rental data' do
+
+      # body = check_response(expected_type: Hash, expected_status: :bad_request)
+      # expect(body).must_include "errors"
+      # # expect(body["errors"]).must_include "movie"
+      # expect(body["errors"]).must_include "customer"
+      # expect(Movie.last.id).wont_equal body["id"]
+
+    end
+
+
   end
 
 
